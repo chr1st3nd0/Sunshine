@@ -104,6 +104,7 @@ public class MainActivityFragment extends Fragment {
     }
 
     public void refresh() {
+
         new DownloadWebpageTask()
         {
             @Override
@@ -113,7 +114,7 @@ public class MainActivityFragment extends Fragment {
                 interfaceSetEnabled = (InterfaceSetEnabled)getActivity();
                 interfaceSetEnabled.setEnabled();
             }
-        }.execute("http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7&APPID=2ff239b1d9ee7ab593d1c041d1a9f6ed");
+        }.execute("30019");
     }
 
     public interface InterfaceSetEnabled
