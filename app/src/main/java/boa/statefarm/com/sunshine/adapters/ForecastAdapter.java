@@ -53,6 +53,11 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
         return new ViewHolder(v);
     }
 
+    public void updateList(List<String> newList)
+    {
+        mForecasts = newList;
+    }
+
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {

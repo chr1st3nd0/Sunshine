@@ -34,6 +34,7 @@ public class MainActivityFragment extends Fragment {
     public static String TAG = "MainActivityFragment";
     @BindView(R.id.listview_forecast) RecyclerView forcastRecycler;
     InterfaceSetEnabled interfaceSetEnabled;
+    List<String> weekForecast;
 
 
     public MainActivityFragment() {
@@ -64,7 +65,7 @@ public class MainActivityFragment extends Fragment {
                 "Fri - Foggy - 21/10",
                 "Sat - Sunny - 23/18",
         };
-        List<String> weekForecast = new ArrayList<String>(Arrays.asList(data));
+        weekForecast = new ArrayList<String>(Arrays.asList(data));
 
         //API_KEY
         //2ff239b1d9ee7ab593d1c041d1a9f6ed
@@ -108,8 +109,12 @@ public class MainActivityFragment extends Fragment {
         new DownloadWebpageTask()
         {
             @Override
-            protected void onPostExecute(String result) {
+            protected void onPostExecute(String[] result) {
                 super.onPostExecute(result);
+
+                weekForecast = new ArrayList<String>(Arrays.asList(result));
+                forecastAdapter.updateList(weekForecast);
+                forecastAdapter.notifyDataSetChanged();
 
                 interfaceSetEnabled = (InterfaceSetEnabled)getActivity();
                 interfaceSetEnabled.setEnabled();
