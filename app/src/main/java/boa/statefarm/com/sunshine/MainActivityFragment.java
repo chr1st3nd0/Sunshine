@@ -21,6 +21,7 @@ import java.util.List;
 
 import boa.statefarm.com.sunshine.adapters.ForecastAdapter;
 import boa.statefarm.com.sunshine.asyncs.DownloadWebpageTask;
+import boa.statefarm.com.sunshine.decorations.DividerItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -72,9 +73,9 @@ public class MainActivityFragment extends Fragment {
 
         refresh();
         forecastAdapter = new ForecastAdapter(weekForecast,getActivity());
-
         forcastRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         forcastRecycler.setHasFixedSize(true);
+        forcastRecycler.addItemDecoration(new DividerItemDecoration(getActivity(),LinearLayoutManager.VERTICAL));
         forcastRecycler.setAdapter(forecastAdapter);
 
         setHasOptionsMenu(true);
