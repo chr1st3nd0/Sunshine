@@ -72,7 +72,13 @@ public class MainActivityFragment extends Fragment {
         //2ff239b1d9ee7ab593d1c041d1a9f6ed
 
         refresh();
-        forecastAdapter = new ForecastAdapter(weekForecast,getActivity());
+        forecastAdapter = new ForecastAdapter(weekForecast,getActivity(), new ForecastAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(String item) {
+                Snackbar.make(rootView, item, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
         forcastRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         forcastRecycler.setHasFixedSize(true);
         forcastRecycler.addItemDecoration(new DividerItemDecoration(getActivity(),LinearLayoutManager.VERTICAL));
