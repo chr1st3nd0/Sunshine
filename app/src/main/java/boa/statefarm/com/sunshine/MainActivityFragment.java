@@ -77,6 +77,9 @@ public class MainActivityFragment extends Fragment {
             public void onItemClick(String item) {
                 Snackbar.make(rootView, item, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                InterfaceStartDetails interfaceStartDetails = (InterfaceStartDetails)getActivity();
+                interfaceStartDetails.startDetails(item);
+
             }
         });
         forcastRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -133,5 +136,12 @@ public class MainActivityFragment extends Fragment {
     {
         void setEnabled();
     }
+
+    public interface InterfaceStartDetails
+    {
+        void startDetails(String forcast);
+    }
+
+
 
 }

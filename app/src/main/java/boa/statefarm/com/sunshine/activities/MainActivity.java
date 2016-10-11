@@ -1,6 +1,7 @@
-package boa.statefarm.com.sunshine;
+package boa.statefarm.com.sunshine.activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,15 +15,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import boa.statefarm.com.sunshine.MainActivityFragment;
+import boa.statefarm.com.sunshine.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainActivityFragment.InterfaceSetEnabled {
+public class MainActivity extends AppCompatActivity implements MainActivityFragment.InterfaceSetEnabled,
+MainActivityFragment.InterfaceStartDetails{
 
     private static final int INTERNET_PERM_STATE = 32;
     private static final int NETWORK_PERM_STATE = 33;
     @BindView(R.id.fragment_containter) FrameLayout fragmentContainer;
     @BindView(R.id.fab) FloatingActionButton fab;
+    public final static String EXTRA_MESSAGE = "FORCAST_PASSED";
     MainActivityFragment mainActivityFragment;
 
     @Override
@@ -179,5 +184,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityFragm
     public void setEnabled() {
         fab.setEnabled(true);
 
+    }
+
+    @Override
+    public void startDetails(String forcast) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        String message = forcast;
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 }
