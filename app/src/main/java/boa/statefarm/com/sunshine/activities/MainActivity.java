@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import boa.statefarm.com.sunshine.MainActivityFragment;
+import boa.statefarm.com.sunshine.fragments.MainActivityFragment;
 import boa.statefarm.com.sunshine.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;

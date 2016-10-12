@@ -1,4 +1,4 @@
-package boa.statefarm.com.sunshine;
+package boa.statefarm.com.sunshine.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import boa.statefarm.com.sunshine.R;
 import boa.statefarm.com.sunshine.adapters.ForecastAdapter;
 import boa.statefarm.com.sunshine.asyncs.DownloadWebpageTask;
 import boa.statefarm.com.sunshine.decorations.DividerItemDecoration;

@@ -10,9 +10,5 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="boa.statefarm.com.sunshine.activities.DetailActivity">
 
-    <TextView
-        android:id="@+id/detail_information"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </RelativeLayout>
