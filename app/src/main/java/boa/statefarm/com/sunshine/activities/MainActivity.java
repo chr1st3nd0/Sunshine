@@ -15,8 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import boa.statefarm.com.sunshine.fragments.MainActivityFragment;
 import boa.statefarm.com.sunshine.R;
+import boa.statefarm.com.sunshine.fragments.MainActivityFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -174,6 +174,8 @@ MainActivityFragment.InterfaceStartDetails{
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
