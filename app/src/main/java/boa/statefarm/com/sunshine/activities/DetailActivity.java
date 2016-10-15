@@ -27,8 +27,5 @@ public class DetailActivity extends AppCompatActivity {
 
         getFragmentManager().beginTransaction().add(R.id.activity_detail,detailFragment,detailFragment.TAG).commit();
 
-
-
-
     }
 }
