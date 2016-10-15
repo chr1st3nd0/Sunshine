@@ -3,9 +3,9 @@
     <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
     <EditTextPreference
         android:capitalize="words"
-        android:defaultValue="@string/pref_default_display_name"
+        android:defaultValue="@string/default_location"
         android:inputType="textCapWords"
-        android:key="example_text"
+        android:key="location"
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:singleLine="true"

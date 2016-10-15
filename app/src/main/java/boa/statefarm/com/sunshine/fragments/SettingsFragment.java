@@ -1,6 +1,7 @@
 package boa.statefarm.com.sunshine.fragments;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,7 @@ import boa.statefarm.com.sunshine.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SettingsFragment extends PreferenceFragment {
+public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener{
 
     View rootView;
 
@@ -32,5 +33,11 @@ public class SettingsFragment extends PreferenceFragment {
 
         return rootView;
     }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+    }
+
 
 }
