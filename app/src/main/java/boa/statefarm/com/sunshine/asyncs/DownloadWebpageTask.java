@@ -41,7 +41,7 @@ public class DownloadWebpageTask extends AsyncTask<Void, Void, String[]> {
 
 
                 String format = "json";
-                String app_id = "2ff239b1d9ee7ab593d1c041d1a9f6ed";
+                String app_id = "**";
 
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 
