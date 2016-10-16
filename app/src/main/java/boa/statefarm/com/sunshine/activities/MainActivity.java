@@ -2,8 +2,11 @@ package boa.statefarm.com.sunshine.activities;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -29,6 +32,7 @@ MainActivityFragment.InterfaceStartDetails{
     @BindView(R.id.fab) FloatingActionButton fab;
     public final static String EXTRA_MESSAGE = "FORCAST_PASSED";
     MainActivityFragment mainActivityFragment;
+    Uri geoLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,8 @@ MainActivityFragment.InterfaceStartDetails{
                 fab.animate().setDuration(500).setInterpolator(new FastOutLinearInInterpolator()).rotationBy(360).start();
             }
         });
+
+
 
 
         requestInternet();
@@ -176,6 +182,19 @@ MainActivityFragment.InterfaceStartDetails{
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.action_map) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String location = preferences.getString(getString(R.string.pref_location_key),
+                                                    getString(R.string.pref_location_default));
+            Uri geoLocation = Uri.parse("geo:0,0?").buildUpon().appendQueryParameter("q",location).build();
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(geoLocation);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
             return true;
         }
 
