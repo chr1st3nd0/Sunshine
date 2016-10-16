@@ -115,9 +115,15 @@ public class MainActivityFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        refresh();
+    }
+
     public void refresh() {
 
-        new DownloadWebpageTask()
+        new DownloadWebpageTask(getActivity())
         {
             @Override
             protected void onPostExecute(String[] result) {
@@ -130,7 +136,7 @@ public class MainActivityFragment extends Fragment {
                 interfaceSetEnabled = (InterfaceSetEnabled)getActivity();
                 interfaceSetEnabled.setEnabled();
             }
-        }.execute("30019");
+        }.execute();
     }
 
     public interface InterfaceSetEnabled

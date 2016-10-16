@@ -1,7 +1,10 @@
 package boa.statefarm.com.sunshine.asyncs;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.text.format.Time;
 import android.util.Log;
 
@@ -13,15 +16,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 
-public class DownloadWebpageTask extends AsyncTask<String, Void, String[]> {
-        @Override
-        protected String[] doInBackground(String... params) {
+public class DownloadWebpageTask extends AsyncTask<Void, Void, String[]> {
+
+    Context mContext;
+
+    public DownloadWebpageTask(Context context) {
+        super();
+
+        mContext = context;
+    }
+
+    @Override
+        protected String[] doInBackground(Void... params) {
 
             // params comes from the execute() call: params[0] is the url.
             HttpURLConnection httpURLConnection = null;
@@ -32,7 +42,29 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String[]> {
 
                 String format = "json";
                 String app_id = "2ff239b1d9ee7ab593d1c041d1a9f6ed";
-                String units = "metric";
+
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+
+            String units;
+            String location;
+
+            if(preferences.contains("location"))
+            {
+                location = preferences.getString("location","");
+            }
+            else
+            {
+                location = "30019";
+            }
+
+            if(preferences.contains("units"))
+            {
+                units = preferences.getString("units","");
+            }
+            else
+            {
+                units = "metric";
+            }
                 int days = 7;
 
             try {
@@ -45,7 +77,7 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String[]> {
 
 
                 Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
-                        .appendQueryParameter(QUERY_PARAMS, params[0])
+                        .appendQueryParameter(QUERY_PARAMS, location)
                         .appendQueryParameter(FORMAT_PARAMS, format)
                         .appendQueryParameter(UNITS_PARAMS, units)
                         .appendQueryParameter(DAYS_PARAMS, Integer.toString(days))
@@ -110,50 +142,6 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String[]> {
 
        }
 
-
-    private String downloadUrl(String myurl) throws IOException {
-        InputStream is = null;
-        // Only display the first 500 characters of the retrieved
-        // web page content.
-        int len = 500;
-
-        try {
-            URL url = new URL(myurl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000 /* milliseconds */);
-            conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            // Starts the query
-            conn.connect();
-            int response = conn.getResponseCode();
-            is = conn.getInputStream();
-
-            // Convert the InputStream into a string
-            String contentAsString = readIt(is, len);
-            return contentAsString;
-
-            // Makes sure that the InputStream is closed after the app is
-            // finished using it.
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-    }
-
-    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
-        Reader reader = null;
-        if (stream == null) {
-            // Nothing to do.
-            return null;
-        }
-
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
-    }
 
     /* The date/time conversion code is going to be moved outside the asynctask later,
      * so for convenience we're breaking it out into its own method now.

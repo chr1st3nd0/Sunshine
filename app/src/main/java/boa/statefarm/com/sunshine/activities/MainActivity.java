@@ -195,4 +195,5 @@ MainActivityFragment.InterfaceStartDetails{
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
+
 }
